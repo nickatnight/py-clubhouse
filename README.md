@@ -3,8 +3,7 @@ Python client for Clubhouse (fork of [clubhouse-client](https://github.com/allar
 
 ## Installation
 
-The package is available on [pypi](https://pypi.org/project/clubhouse/) and can
-be installed like any other packages.
+The package is available on [pypi](https://pypi.org/project/py-clubhouse/) and can be installed like any other packages.
 
     $ pip install py-clubhouse
 
