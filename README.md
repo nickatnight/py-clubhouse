@@ -13,7 +13,7 @@ be installed like any other packages.
 Refer to [Clubhouse API Docs](https://clubhouse.io/api/rest/v3/) for more information.
 
 ```python
-from pyclubhouse import Clubhouse
+from py_clubhouse import Clubhouse
 
 clubhouse = Clubhouse('your api key')
 
