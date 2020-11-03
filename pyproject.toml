@@ -8,7 +8,7 @@ version = "0.1.0"
 description = "Python client for Clubhouse"
 authors = ["nickatnight <nickkelly.858@gmail.com>"]
 license = "MIT"
-readme = "README.rst"
+readme = "README.md"
 repository = "https://github.com/nickatnight/py-clubhouse/"
 classifiers = [
     "Environment :: Web Environment",
