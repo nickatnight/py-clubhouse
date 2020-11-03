@@ -21,5 +21,6 @@ clubhouse.post('stories', json=story)
 ```
 
 ## TODO
+* add GHA workflow
 * create models for relevant resources
 * moar tests
