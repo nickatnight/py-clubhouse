@@ -32,7 +32,7 @@ jobs:
   linting:
     runs-on: ubuntu-18.04
     needs: [ci]
-    name: Build backend
+    name: run lint
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -43,7 +43,7 @@ jobs:
       - name: Run image
         uses: abatilo/actions-poetry@v2.0.0
         with:
-          poetry-version: 3.7
+          poetry-version: 1.1.4
       - name: install packages
         run: poetry install
       - name: run black
