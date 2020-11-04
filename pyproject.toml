@@ -4,7 +4,7 @@ include = '\.pyi?$'
 
 [tool.poetry]
 name = "py-clubhouse"
-version = "0.1.0"
+version = "0.1.1"
 description = "Python client for Clubhouse"
 authors = ["nickatnight <nickkelly.858@gmail.com>"]
 license = "MIT"
