@@ -4,7 +4,7 @@
 <a href="https://codecov.io/gh/nickatnight/py-clubhouse">
   <img src="https://codecov.io/gh/nickatnight/py-clubhouse/branch/master/graph/badge.svg?token=E03I4QK6D9"/>
 </a>
-<a href="https://github.com/nickatnight/py-clubhouse/releases"><img alt="Actions Status" src="https://img.shields.io/pypi/v/py-clubhouse?style=plastic"></a>
+<a href="https://pypi.org/project/py-clubhouse/"><img alt="Actions Status" src="https://img.shields.io/pypi/v/py-clubhouse?style=plastic"></a>
 </p>
 
 
