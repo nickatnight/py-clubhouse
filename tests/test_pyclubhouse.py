@@ -1,4 +1,4 @@
-from pyclubhouse import __version__
+from py_clubhouse import __version__
 
 
 def test_version():
