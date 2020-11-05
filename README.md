@@ -27,9 +27,11 @@ clubhouse = Clubhouse('your api key')
 
 story = clubhouse.get_story(1234)  # returns Story object
 workflows = clubhouse.workflows()  # returns list of Workflow objects
+stories = clubhouse.search_stories("state:Staging")  # returns list of Story objects
 ```
 
 ## TODO
 * ~~add GHA workflow~~
-* create models for relevant resources
+* ~~create models for relevant resources~~
 * moar tests
+* add c.r.u.d. methods for relevant models

@@ -1,35 +1,51 @@
 import logging
 from typing import List
 
+from py_clubhouse import models
 from .endpoints import API_URLS
-from .models.story import Story
-from .models.workflow import Workflow
-from .utils.request import RequestAPI
+from .core.request import RequestAPI
 
 
 logger = logging.getLogger(__name__)
 
 
 class Clubhouse:
-    def __init__(self, api_key, ignored_status_codes=None) -> None:
-        self.ignored_status_codes = ignored_status_codes or []
-
+    def __init__(self, api_key) -> None:
         self._req = RequestAPI(api_key)
 
-    def search_stories(self) -> List[Story]:
-        kwargs = {"params": {"query": "state:Staging"}}
-        result = self._req.call("get", API_URLS.get("search_stories"), **kwargs)
-        items = result["data"]
+    def search_stories(self, query: str) -> List[models.Story]:
+        """search stories by text.
 
-        while "next" in result and result["next"]:
-            result = self._req.call("get", result["next"])
-            items = [*items, *result["data"]]
-        return [Story(self._req, d) for d in items]
+        see https://help.clubhouse.io/hc/en-us/articles/360000046646-Search-Operators
 
-    def get_story(self, story_id: int) -> Story:
+        :param query:
+        :return:                        list of Story(s)
+        """
+        assert isinstance(query, str), query
+        kwargs = {"params": {"query": query}}
+        data = self._req.call("get", API_URLS.get("search_stories"), **kwargs)
+        results = models.StorySearchResults(self._req, data)
+        items = results.data
+
+        while results.next:
+            data = self._req.call("get", results.next)
+            results = models.StorySearchResults(self._req, data)
+            items = [*items, *results.data]
+
+        return [models.Story(self._req, d) for d in items]
+
+    def get_story(self, story_id: int) -> models.Story:
+        """get story by id
+        :param story_id:
+        :return:                        Story instance
+        """
+        assert isinstance(story_id, int), story_id
         data = self._req.call("get", f'{API_URLS.get("stories")}/{story_id}')
-        return Story(self._req, data)
+        return models.Story(self._req, data)
 
-    def workflows(self) -> List[Workflow]:
+    def workflows(self) -> List[models.Workflow]:
+        """get all workflows for a workspace
+        :return:                        list of Workflow(s)
+        """
         data = self._req.call("get", API_URLS.get("workflows"))
-        return [Workflow(self._req, d) for d in data]
+        return [models.Workflow(self._req, d) for d in data]

@@ -9,7 +9,8 @@ on:
       - master
 
 jobs:
-  ci:
+  lint-multi-os-python-poetry:
+    name: Lint ${{ matrix.os }} | ${{ matrix.python-version }} | ${{ matrix.poetry-version }}
     strategy:
       fail-fast: false
       matrix:
@@ -28,11 +29,41 @@ jobs:
           poetry-version: ${{ matrix.poetry-version }}
       - name: install packages
         run: poetry install
+      - name: run black
+        run: poetry run black . --check
+      - name: run flake8
+        run: poetry run flake8
 
-  linting:
+  test-multi-os-python-poetry:
+    name: Test ${{ matrix.os }} | ${{ matrix.python-version }} | ${{ matrix.poetry-version }}
     runs-on: ubuntu-18.04
-    needs: [ci]
-    name: run lint
+    needs: [lint-multi-os-python-poetry]
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [3.7, 3.8]
+        poetry-version: [1.0, 1.1.2, 1.1.4]
+        os: [ubuntu-18.04, macos-latest, windows-latest]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Run image
+        uses: abatilo/actions-poetry@v2.0.0
+        with:
+          poetry-version: ${{ matrix.poetry-version }}
+      - name: install packages
+        run: poetry install
+      - name: run pytest
+        run: poetry run pytest
+  
+  code-coverage:
+    name: run code coverage
+    runs-on: ubuntu-18.04
+    needs: [test-multi-os-python-poetry]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -46,10 +77,6 @@ jobs:
           poetry-version: 1.1.4
       - name: install packages
         run: poetry install
-      - name: run black
-        run: poetry run black . --check
-      - name: run flake8
-        run: poetry run flake8
       - name: run coverage
         run: |
           poetry run coverage run -m pytest
