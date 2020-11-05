@@ -1,6 +1,7 @@
 # py-clubhouse
 
 <p align="center">
+<a href="https://github.com/nickatnight/py-clubhouse"><img alt="Build Status" src="https://github.com/nickatnight/py-clubhouse/workflows/Run%20CI/badge.svg?branch=master"></a>
 <a href="https://codecov.io/gh/nickatnight/py-clubhouse">
   <img src="https://codecov.io/gh/nickatnight/py-clubhouse/branch/master/graph/badge.svg?token=E03I4QK6D9"/>
 </a>
@@ -8,7 +9,7 @@
 </p>
 
 
-Python client for Clubhouse (fork of [clubhouse-client](https://github.com/allardbrain/clubhouse-client) because I needed more flexibility for special use cases on work engagements)
+Python client for Clubhouse (started as a fork of [clubhouse-client](https://github.com/allardbrain/clubhouse-client))
 
 ## Installation
 
@@ -27,9 +28,20 @@ clubhouse = Clubhouse('your api key')
 
 story = clubhouse.get_story(1234)  # returns Story object
 workflows = clubhouse.workflows()  # returns list of Workflow objects
+stories = clubhouse.search_stories("state:Staging")  # returns list of Story objects
 ```
 
+## Development
+
+1. Clone repo
+2. Install [poetry](https://github.com/python-poetry/poetry/blob/master/README.md) globally.
+3. Activate virtual env `poetry shell`
+4. Install dependencies with `poetry install`
+5. Run pytest `poetry run pytest`
+
 ## TODO
+
 * ~~add GHA workflow~~
-* create models for relevant resources
+* ~~create models for relevant resources~~
 * moar tests
+* add c.r.u.d. methods for relevant models

@@ -1,19 +1,13 @@
-from typing import Dict
+from typing import NoReturn, Any
 
-from ..utils.request import RequestAPI
+from py_clubhouse import models
+from .workflow_state import WorkflowState
 
 
-class Workflow:
-    STR_FIELD = "id"
+class Workflow(models.ClubBASE):
+    def __setattr__(self, attribute: str, value: Any) -> NoReturn:
+        """Objectify states data attribute."""
+        if attribute == "states":
+            value = [WorkflowState(self._req, v) for v in value]
 
-    def __init__(self, req: RequestAPI, data: Dict) -> None:
-        self._req = req
-        self.__dict__.update(**data)
-
-    def __repr__(self) -> str:
-        """Return an object initialization representation of the instance."""
-        return f"{self.__class__.__name__}({self.STR_FIELD}={str(self)!r})"
-
-    def __str__(self) -> str:
-        """Return a string representation of the instance."""
-        return str(getattr(self, self.STR_FIELD))
+        super().__setattr__(attribute, value)
