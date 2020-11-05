@@ -44,6 +44,11 @@ class Story(models.ClubBASE):
         super().__setattr__(attribute, value)
 
     def update(self, data: Dict) -> bool:
+        """update a Story
+
+        :param data:                    payload to update with
+        :return:                        True if successful, False otherwise
+        """
         url = f'{API_URLS.get("stories")}/{self.id}'
         req_json = self._req.call("put", url, data=json.dumps(data))
         self._to_attributes(req_json)

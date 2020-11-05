@@ -8,7 +8,7 @@
 </p>
 
 
-Python client for Clubhouse (fork of [clubhouse-client](https://github.com/allardbrain/clubhouse-client) because I needed more flexibility for special use cases on work engagements)
+Python client for Clubhouse (started as a fork of [clubhouse-client](https://github.com/allardbrain/clubhouse-client))
 
 ## Installation
 
@@ -30,7 +30,16 @@ workflows = clubhouse.workflows()  # returns list of Workflow objects
 stories = clubhouse.search_stories("state:Staging")  # returns list of Story objects
 ```
 
+## Development
+
+1. Clone repo
+2. Install [poetry](https://github.com/python-poetry/poetry/blob/master/README.md) globally.
+3. Activate virtual env `poetry shell`
+4. Install dependencies with `poetry install`
+5. Run pytest `poetry run pytest`
+
 ## TODO
+
 * ~~add GHA workflow~~
 * ~~create models for relevant resources~~
 * moar tests
