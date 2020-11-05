@@ -1,6 +1,7 @@
 # py-clubhouse
 
 <p align="center">
+<a href="https://github.com/nickatnight/py-clubhouse"><img alt="Build Status" src="https://github.com/nickatnight/py-clubhouse/workflows/Run%20CI/badge.svg?branch=master"></a>
 <a href="https://codecov.io/gh/nickatnight/py-clubhouse">
   <img src="https://codecov.io/gh/nickatnight/py-clubhouse/branch/master/graph/badge.svg?token=E03I4QK6D9"/>
 </a>
