@@ -28,8 +28,7 @@ class Clubhouse:
         items = results.data
 
         while results.next:
-            data = self._req.call("get", results.next)
-            results = models.StorySearchResults(self._req, data)
+            results = results.get_next()
             items = [*items, *results.data]
 
         return [models.Story(self._req, d) for d in items]
